@@ -1,0 +1,23 @@
+{
+  "name": "tests_makeup",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "wdio:all": "wdio run ./wdio.multiple.conf.js",
+    "wdio:chrome": "wdio run ./wdio.chrome.conf.js",
+    "wdio:firefox": "wdio run ./wdio.firefox.conf.js",
+    "wdio:safari": "wdio run ./wdio.safari.conf.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@wdio/cli": "^9.11.0",
+    "@wdio/local-runner": "^9.11.0",
+    "@wdio/mocha-framework": "^9.11.0",
+    "@wdio/spec-reporter": "^9.11.0",
+    "chromedriver": "^134.0.2",
+    "wdio-chromedriver-service": "^8.1.1"
+  }
+}
