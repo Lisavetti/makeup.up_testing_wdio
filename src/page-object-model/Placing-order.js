@@ -18,21 +18,11 @@ export default class PlacingOrder {
         await this.phoneNumber.setValue(phone);
         await this.emailAdress.setValue(email);
 
-
-        if (browser.capabilities.browserName === 'chrome') {
-            const cityInput = await $('input#city');
-            await this.nextButton.click();
-            await cityInput.waitForClickable();
-            await cityInput.click();
-            await cityInput.setValue('Київ');
-            await this.cityOption.click();
-        } else {
-            const cityInput = await $('#select-city');
-            await this.nextButton.click();
-            await cityInput.setValue(' Київ');
-            await this.cityOption.waitForDisplayed({ timeout: 5000 }); 
-            await this.cityOption.click();
-        }
+        const cityInput = await $('#select-city');
+        await this.nextButton.click();
+        await cityInput.setValue(' Київ');
+        await this.cityOption.waitForDisplayed({ timeout: 5000 });
+        await this.cityOption.click();
     };
 };
 

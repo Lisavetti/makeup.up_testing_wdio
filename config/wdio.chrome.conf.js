@@ -21,7 +21,7 @@ exports.config = {
     // of the config file unless it's absolute.
     //
     specs: [
-        './test/specs/**/*.js'
+        '../src/specs/**/*.js'
     ],
     // Patterns to exclude.
     exclude: [
@@ -51,7 +51,7 @@ exports.config = {
     //
     capabilities: [{
         // capabilities for local browser web tests
-        browserName: 'safari' // or "firefox", "microsoftedge", "safari"
+        browserName: 'chrome' // or "firefox", "microsoftedge", "safari"
     }],
 
     //

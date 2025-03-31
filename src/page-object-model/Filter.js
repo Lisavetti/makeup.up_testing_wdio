@@ -6,6 +6,7 @@ export default class Filter {
     get costButton() { return $('div.catalog-filter-block.catalog-filter-block__price'); }
     get priceFilterFrom() { return $('input[name="search_price_from"]'); }
     get priceFilterTo() { return $('input[name="search_price_to"]'); }
+    get submitButton() { return $('button.button.submit'); }
     get bodyText() { return $('label[for="price-from-to"]'); }
 
 
@@ -36,16 +37,20 @@ export default class Filter {
             }
         }
 
-
         await this.priceFilterFrom.setValue(from);
         await this.priceFilterTo.setValue(to);
+
+        const isDisplayedButton = await this.submitButton.isDisplayed();
+        if(isDisplayedButton) {
+            await this.submitButton.click();
+        }
         await this.bodyText.waitForExist({ timeout: 5000 });
         return await this.bodyText.getText();
     };
 
     async checkPrices() {
         const arrayOfPrices = [];
-        for (let i = 6; i < 36; i++) {
+        for (let i = 10; i < 36; i++) {
             arrayOfPrices.push(await $(`body > div.site-wrap > div.main-wrap > div.content-wrap > div > div:nth-child(1) > div.catalog > div.catalog-content > div > div.catalog-products > ul > li:nth-child(${i})`));
         }
 

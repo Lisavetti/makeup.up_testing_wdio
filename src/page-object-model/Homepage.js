@@ -3,8 +3,8 @@ export default class HomePage {
     get searchArea() { return $('.search-input'); }
     get showResultButton() { return $('.search-result__link'); }
     get searchResult() { return $('.search-results.info-text'); }
-    get searchResultItems() { return $('.simple-slider-list__description'); }
-
+    get searchResultItems() { return $('.info-product-wrapper'); }
+    
 
     async searchProduct(product) {
         await this.searchButton.click();
@@ -21,6 +21,7 @@ export default class HomePage {
         const textOfItem = await this.searchResultItems.getText();
         const textOfSearchResult = await this.searchResult.getText();
         return [textOfItem, textOfSearchResult];
+        
     };
 };
 
