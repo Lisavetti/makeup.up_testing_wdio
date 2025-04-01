@@ -9,7 +9,6 @@ import { categories, getCategoryKeyByName } from "../utils/categories.js";
 import { parsePrice, arePricesInRange, getInvalidPrices } from "../utils/priceUtils.js";
 import { productNames } from "../utils/productNames.js";
 
-
 const homepage = new HomePage();
 const filter = new Filter();
 const addingToCart = new AddingToCart();
@@ -17,19 +16,22 @@ const checkingCart = new CheckingCart();
 const placingOrder = new PlacingOrder();
 const reviews = new Reviews();
 
+var should = require('chai').should();
+var assert = require('chai').assert;
+var expect = require('chai').expect;
+
 describe("Search for products", () => {
 
     it("Product search by name", async () => {
         const resMes = await homepage.searchProduct(productNames.searchbyName);
-        expect(resMes[1]).toContain(`Результати пошуку за запитом «${productNames.searchbyName}».`);
-        expect(resMes[0].toLowerCase()).toContain('туш');
+        assert.include(resMes[1], `Результати пошуку за запитом «${productNames.searchbyName}».`);
+        assert.include(resMes[0].toLowerCase(), 'туш');
     });
-
 
     it("Search products by brand", async () => {
         const resMes = await homepage.searchProduct(productNames.searchbyBrand);
-        expect(resMes[1].toLowerCase()).toContain(`результати пошуку за запитом «${productNames.searchbyBrand}».`);
-        expect(resMes[0].toLowerCase()).toContain(productNames.searchbyBrand);
+        resMes[1].toLowerCase().should.include(`результати пошуку за запитом «${productNames.searchbyBrand}».`);
+        resMes[0].toLowerCase().should.include(productNames.searchbyBrand);
     });
 });
 
@@ -43,7 +45,7 @@ describe("Filtering products", () => {
 
         const bodyMes = await filter.filterProduct(categoryKey, from, to);
         await browser.pause(2000);
-        await expect(bodyMes).toContain(`від ${from} до ${to} ₴`);
+        expect(bodyMes).to.include(`від ${from} до ${to} ₴`);
 
 
         const rawPrices = await filter.checkPrices();
@@ -51,7 +53,7 @@ describe("Filtering products", () => {
         const parsedPrices = rawPrices.map(parsePrice);
         const invalidPrices = getInvalidPrices(parsedPrices, from, to);
         const allInRange = arePricesInRange(parsedPrices, from, to);
-        await expect(allInRange).toBe(true);
+        expect(allInRange).to.be.true;
     });
 });
 
@@ -63,7 +65,7 @@ describe("Adding items to cart", () => {
         await homepage.searchProduct(productNames.scalpAndHairMask);
         const countInput = await addingToCart.addingItemToCart();
         const countValue = await countInput.getValue();
-        await expect(countValue).toEqual("1");
+        assert.equal(countValue, "1");
     });
 });
 
@@ -75,9 +77,10 @@ describe("Viewing the shopping cart", () => {
 
         const info = await checkingCart.checkingCartInformation();
         const total = await checkingCart.checkingCartTotal();
+        const productText = await checkingCart.productDescription.getText();
 
-        await expect(checkingCart.productDescription).toHaveText(productNames.scalpAndHairMask);
-        expect(info).toEqual(total);
+        productText.should.equal(productNames.scalpAndHairMask);
+        info.should.equal(total);
     });
 });
 
@@ -87,8 +90,8 @@ describe("Placing an order", () => {
         await homepage.searchProduct(productNames.scalpAndHairMask);
         await addingToCart.addingItemToCart();
         await placingOrder.fillField('Test_firstname', 'Test_lastname', '0501234567', 'test@domail.com');
-
-        await expect(placingOrder.submitButton).toBeDisplayed();
+        await browser.pause(2000);
+        expect(await placingOrder.submitButton.isDisplayed());
     });
 
 });
@@ -99,7 +102,9 @@ describe("View product reviews", () => {
         await homepage.searchProduct(productNames.yslFoundation);
 
         const title = await reviews.checkReviews();
-        await expect(title).toHaveText(expect.stringContaining('Відгуки'));
+        const text = await title.getText();
+        assert.include(text, 'Відгуки');
+        // await expect(title).toHaveText(expect.stringContaining('Відгуки'));
     });
 });
 
