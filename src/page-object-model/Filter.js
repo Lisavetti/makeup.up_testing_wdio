@@ -25,7 +25,6 @@ export default class Filter {
         const categories = await this.arrayOfcategory;
         const chosenCategory = categories[numberOfCategory];
         await chosenCategory.click();
-        await browser.pause(2000);
 
         
         const isFilterBlockVisible = await this.filterBlock.isDisplayed();

@@ -6,7 +6,7 @@ export default class CheckingCart {
 
     async checkingCartInformation() {
 
-        await expect(this.priceColumn).toBeDisplayed();
+        await this.priceColumn.waitForDisplayed({ timeout: 5000 });
         const priceText = await this.priceColumn.getText();
         const priceValue = parseInt(priceText.replace(/\D/g, ''), 10);
 
@@ -14,7 +14,7 @@ export default class CheckingCart {
     }
 
     async checkingCartTotal() {
-        await expect(this.totalElement).toBeDisplayed();
+        await this.totalElement.waitForDisplayed({ timeout: 5000 });
         const totalText = await this.totalElement.getText();
         const totalValue = parseInt(totalText.replace(/\D/g, ''), 10);
 

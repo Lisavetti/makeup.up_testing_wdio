@@ -25,6 +25,8 @@ export default class PlacingOrder {
         await cityInput.setValue(userData.city);
         await this.cityOption.waitForDisplayed({ timeout: 5000 });
         await this.cityOption.click();
+
+        await this.submitButton.waitForDisplayed();
     };
 };
 
