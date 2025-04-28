@@ -19,4 +19,4 @@ export const categories = {
 
 export function getCategoryKeyByName(name) {
     return Number(Object.keys(categories).find(key => categories[key] === name));
-}
+};

@@ -10,9 +10,7 @@ export default class HomePage {
         await this.searchButton.click();
         await this.searchArea.waitForClickable(2000);
         await this.searchArea.setValue(product);
-        await browser.pause(2000);
         await browser.keys('Enter');
-        await browser.pause(2000);
 
         if (await this.showResultButton.isExisting()) {
             await this.showResultButton.click();

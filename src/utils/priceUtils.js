@@ -4,7 +4,7 @@
  */
 export function parsePrice(rawPrice) {
     return Number(rawPrice.replace(/[^\d]/g, ""));
-}
+};
 
 /**
  * @param {number[]} prices 
@@ -14,7 +14,7 @@ export function parsePrice(rawPrice) {
  */
 export function arePricesInRange(prices, from, to) {
     return prices.every(price => price >= from && price <= to);
-}
+};
 
 /**
  * @param {number[]} prices 
@@ -24,4 +24,4 @@ export function arePricesInRange(prices, from, to) {
  */
 export function getInvalidPrices(prices, from, to) {
     return prices.filter(price => price < from || price > to);
-}
+};

@@ -16,7 +16,7 @@
     "@wdio/cli": "^9.11.0",
     "@wdio/local-runner": "^9.12.2",
     "@wdio/mocha-framework": "^9.12.2",
-    "@wdio/spec-reporter": "^9.12.2",
+    "@wdio/spec-reporter": "^9.12.6",
     "chromedriver": "^134.0.5",
     "geckodriver": "^5.0.0",
     "wdio-chromedriver-service": "^8.1.1",
